@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import Global from '../Global';
 import axios from 'axios';
+import DoctorDetalles from './DoctorDetalles';
 
 export default class DoctoresComponent extends Component {
     url = Global.urlApiDoctores;
 
     state = {
-        doctores: []
+        doctores: [],
+        idDoctor: null
     }
 
     loadDoctoresHospital = () => {
         let request = "api/doctores/doctoreshospital/" + this.props.idHospital;
-        console.log(this.url + request);
         axios.get(this.url + request).then(response => {
-            console.log("Leyendo doctores");
             this.setState({
-                doctores: response.data
+                doctores: response.data,
+                idDoctor: null
             });
+        });
+    }
+
+    mostrarDetalles = (idDoctor) => {
+        this.setState({
+            idDoctor: idDoctor
         });
     }
 
@@ -41,6 +48,7 @@ export default class DoctoresComponent extends Component {
                             <th>Especialidad</th>
                             <th>Salario</th>
                             <th>Hospital</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,12 +60,23 @@ export default class DoctoresComponent extends Component {
                                         <td>{doctor.especialidad}</td>
                                         <td>{doctor.salario}</td>
                                         <td>{doctor.idHospital}</td>
+                                        <td>
+                                            <button className="btn btn-info btn-sm"
+                                                onClick={() => this.mostrarDetalles(doctor.idDoctor)}>
+                                                Detalles
+                                            </button>
+                                        </td>
                                     </tr>
                                 )
                             })
                         }
                     </tbody>
                 </table>
+
+                {
+                    this.state.idDoctor != null &&
+                    <DoctorDetalles idDoctor={this.state.idDoctor} />
+                }
             </div>
         )
     }

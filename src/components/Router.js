@@ -4,6 +4,8 @@ import MenuComponent from './MenuComponent'
 import HomeComponent from './HomeComponent'
 import { useParams } from 'react-router-dom';
 import DoctoresComponent from './DoctoresComponent';
+import DoctorDetalles from './DoctorDetalles';
+
  
 export default class Router extends Component {
     render() {
@@ -12,6 +14,10 @@ export default class Router extends Component {
             let {idHospital} = useParams();
             return <DoctoresComponent idHospital={idHospital} />
         }
+        function DetallesElement() {
+            let { idDoctor } = useParams();
+             return <DoctorDetalles idDoctor={idDoctor} />;
+}
  
         return (
             <BrowserRouter>
