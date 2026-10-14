@@ -25,6 +25,7 @@ export default class Router extends Component {
                 <Routes>
                     <Route path='/' element={<HomeComponent />} />
                     <Route path='/doctores/:idHospital' element={<DoctoresElement/>}/>
+                    <Route path='/createhospital' element={<createhospital/>}/>
                    
                 </Routes>
             </BrowserRouter>
