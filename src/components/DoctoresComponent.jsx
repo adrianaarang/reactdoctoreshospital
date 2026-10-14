@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Global from '../Global';
-import axios from 'axios';
 import DoctorDetalles from './DoctorDetalles';
+import ServiceHospitales from '../services/ServiceHospitales';
 
 export default class DoctoresComponent extends Component {
-    url = Global.urlApiDoctores;
+    service = new ServiceHospitales();
 
     state = {
         doctores: [],
@@ -12,13 +11,11 @@ export default class DoctoresComponent extends Component {
     }
 
     loadDoctoresHospital = () => {
-        let request = "api/doctores/doctoreshospital/" + this.props.idHospital;
-        axios.get(this.url + request).then(response => {
+        this.service.getDoctoresHospital(this.props.idHospital).then(result => {
             this.setState({
-                doctores: response.data,
-                idDoctor: null
-            });
-        });
+                doctores: result
+            })
+        })
     }
 
     mostrarDetalles = (idDoctor) => {
@@ -34,8 +31,8 @@ export default class DoctoresComponent extends Component {
     componentDidUpdate = (oldProps) => {
         if (oldProps.idHospital !== this.props.idHospital) {
             this.loadDoctoresHospital();
-             this.setState({
-                idDoctor: -1
+            this.setState({
+                idDoctor: null
             })
         }
     }
@@ -56,9 +53,9 @@ export default class DoctoresComponent extends Component {
                     </thead>
                     <tbody>
                         {
-                            this.state.doctores.map((doctor, index) => {
+                            this.state.doctores.map((doctor) => {
                                 return (
-                                    <tr key={index}>
+                                    <tr key={doctor.idDoctor}>
                                         <td>{doctor.apellido}</td>
                                         <td>{doctor.especialidad}</td>
                                         <td>{doctor.salario}</td>

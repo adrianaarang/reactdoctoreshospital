@@ -11,11 +11,10 @@ export default class HospitalesComponent extends Component {
 
   loadHospitales = () => {
 
-    //una promesa no es un métood, es un ob¡jeto
     this.service.getHospitales().then((result) => {
       this.setState({
         hospitales: result,
-        status: true
+         status: true 
       })
     })
   }
