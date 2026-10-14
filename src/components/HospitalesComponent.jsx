@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import axios from 'axios'
-import Global from '../Global'
+import ServiceHospitales from '../services/ServiceHospitales'
 
 export default class HospitalesComponent extends Component {
-  url = Global.urlApiHospitales
+  service = new ServiceHospitales();
 
   state = {
     hospitales: [],
@@ -11,11 +10,11 @@ export default class HospitalesComponent extends Component {
   }
 
   loadHospitales = () => {
-    let request = "api/hospitales";
-    axios.get(this.url + request).then((response) => {
-      console.log("Leyendo hospitales");
+
+    //una promesa no es un métood, es un ob¡jeto
+    this.service.getHospitales().then((result) => {
       this.setState({
-        hospitales: response.data,
+        hospitales: result,
         status: true
       })
     })
