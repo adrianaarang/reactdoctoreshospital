@@ -7,6 +7,7 @@ import DoctoresComponent from './DoctoresComponent';
 import DoctorDetalles from './DoctorDetalles';
 import CreateHospital  from './CreateHospital';
 import HospitalesComponent  from './HospitalesComponent.jsx';
+import EjemploServiceComponent from './EjemploServiceComponent.jsx';
 
 
  
@@ -30,6 +31,8 @@ export default class Router extends Component {
                     <Route path='/doctores/:idHospital' element={<DoctoresElement/>}/>
                     <Route path='/createhospital' element={<CreateHospital/>}/>
                     <Route path='/hospitalescomponent' element={<HospitalesComponent/>}/>
+                    <Route path='/ejemplo' element={<EjemploServiceComponent/>}/>
+
                    
                 </Routes>
             </BrowserRouter>
