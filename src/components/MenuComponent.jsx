@@ -41,9 +41,8 @@ export default class MenuComponent extends Component {
                                 <NavLink className="nav-link" to="/createhospital">Nuevo Hospital</NavLink>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Hospitales
-                                </a>
+                                <NavLink className="nav-link" to="/hospitalescomponent">Hospitales</NavLink>
+
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown"> {/* En BS5 el dropdown-menu suele ser un <ul> */}
                                     {
                                         this.state.hospitales.map((hospital, index) => {
