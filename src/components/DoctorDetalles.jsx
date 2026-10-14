@@ -12,6 +12,7 @@ export default class DoctorDetalles extends Component {
     loadDoctor = () => {
         let request = "api/doctores/" + this.props.idDoctor;
         axios.get(this.url + request).then(response => {
+            console.log("Find doctor");
             this.setState({
                 doctor: response.data
             });
@@ -25,6 +26,7 @@ export default class DoctorDetalles extends Component {
     componentDidUpdate = (oldProps) => {
         if (oldProps.idDoctor !== this.props.idDoctor) {
             this.loadDoctor();
+           
         }
     }
 
@@ -35,14 +37,30 @@ export default class DoctorDetalles extends Component {
 
         let doctor = this.state.doctor;
         return (
-            <div className="card mt-3" style={{ maxWidth: "400px" }}>
-                <div className="card-body">
-                    <h2 className="card-title">{doctor.apellido}</h2>
-                    <p><strong>Id:</strong> {doctor.idDoctor}</p>
-                    <p><strong>Especialidad:</strong> {doctor.especialidad}</p>
-                    <p><strong>Salario:</strong> {doctor.salario}</p>
-                    <p><strong>Hospital:</strong> {doctor.idHospital}</p>
-                </div>
+            <div>
+                <h1>Detalles Doctor</h1>
+                {
+                    this.state.doctor &&
+                    ( <ul className='list-group'>
+                        <li className='list-list-group-item'>
+                            Apellido: {this.state.doctor.apellido}
+                        </li>
+                         <li className='list-list-group-item'>
+                            Especialidad: {this.state.doctor.especialidad}
+                        </li>
+                         <li className='list-list-group-item'>
+                            Salario: {this.state.doctor.salario}
+                        </li>
+                         <li className='list-list-group-item'>
+                            Hospital: {this.state.doctor.idHospital}
+                        </li>
+                       
+                    </ul>
+
+                    )
+
+                }
+          
             </div>
         );
     }
